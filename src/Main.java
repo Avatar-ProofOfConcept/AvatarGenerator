@@ -29,6 +29,7 @@ public class Main {
 	        String func = sc.nextLine();
 	        
 	        System.out.println("Avatars generation...");
+	        float lStartTime = System.nanoTime();
 	        ArrayList <AvatarProfile> avatars =new ArrayList<AvatarProfile>();
 	        int port=3001;
 	        int nb=0,c,l,nb1;
@@ -217,6 +218,10 @@ public class Main {
    			}
    	        port++;
 	        }
+	        float lEndTime = System.nanoTime();
+	        float output = lEndTime - lStartTime;
+
+	        System.out.println("Elapsed time in milliseconds: " + output / 1000000f);
 	}
 	    
 
@@ -298,7 +303,7 @@ public class Main {
 	        		bw.write("<hasLabel rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">LabelG"+port+"</hasLabel>");
 	        		bw.newLine();
 	        		 
-	        		if(tmp.getGoal().getAtomictasks().size()>0)//we have grouped task
+	        		if(tmp.getGoal().getGroupedTask().getAtomicTasks().size()>0)//we have grouped task
 	        		{
 	        			bw.write("<hasChildTask rdf:resource=\"http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#Task"+port+"\"/>");
 		        		bw.newLine();
@@ -314,7 +319,7 @@ public class Main {
 	        		bw.newLine();
 	        		
 		        	 /************************Tasks****************/
-	        		if(tmp.getGoal().getAtomictasks().size()>0)//we have grouped task
+	        		if(tmp.getGoal().getGroupedTask().getAtomicTasks().size()>0)//we have grouped task
 	        		{
 	        			bw.write("<owl:NamedIndividual rdf:about=\"http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#Task"+port+"\">");
 		        		bw.newLine();
@@ -333,10 +338,29 @@ public class Main {
 		        		bw.newLine();
 		        		bw.write("</owl:NamedIndividual>");
 		        		bw.newLine();
+		        		for(i=0;i<tmp.getGoal().getGroupedTask().getAtomicTasks().size();i++)
+		        		{
+		        			bw.write("<owl:NamedIndividual rdf:about=\"http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#Task"+tmp.getGoal().getGroupedTask().getAtomicTasks().get(i)+"\">");
+			        		bw.newLine();
+			        		bw.write("<rdf:type rdf:resource=\"http://www.semanticweb.org/kkhadir/ontologies/2019/1/DEMISA#AtomicTask\"/>");
+			        		bw.newLine();
+			        		bw.write("<hasLabel rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">Label"+tmp.getGoal().getGroupedTask().getAtomicTasks().get(i)+"</hasLabel>");
+			        		bw.newLine();
+			        		bw.write("<hasFunction rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">Function"+tmp.getGoal().getGroupedTask().getAtomicTasks().get(i)+"</hasFunction>");
+			        		bw.newLine();
+			        		bw.write("<hasInput rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">x</hasInput>");
+			        		bw.newLine();
+			        		bw.write("<hasOutput rdf:datatype=\"http://www.w3.org/2001/XMLSchema#boolean\">false</hasOutput>");
+			        		bw.newLine();
+			        		bw.write("<hasPrecondition rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">TimeExec&lt;2</hasPrecondition>");
+			        		bw.newLine();
+			        		bw.write("</owl:NamedIndividual>");
+			        		bw.newLine();
+		        		}
 	        		}
 	        		for(i=0;i<tmp.getGoal().getAtomictasks().size();i++)
 	        		{
-	        			bw.write("<hasChildTask rdf:resource=\"http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#Task"+tmp.getGoal().getAtomictasks().get(i)+"\"/>");
+	        			bw.write("<owl:NamedIndividual rdf:about=\"http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#Task"+tmp.getGoal().getAtomictasks().get(i)+"\">");
 		        		bw.newLine();
 		        		bw.write("<rdf:type rdf:resource=\"http://www.semanticweb.org/kkhadir/ontologies/2019/1/DEMISA#AtomicTask\"/>");
 		        		bw.newLine();
@@ -348,7 +372,7 @@ public class Main {
 		        		bw.newLine();
 		        		bw.write("<hasOutput rdf:datatype=\"http://www.w3.org/2001/XMLSchema#boolean\">false</hasOutput>");
 		        		bw.newLine();
-		        		bw.write("<hasPrecondition rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">TimeExec<0.2</hasPrecondition>");
+		        		bw.write("<hasPrecondition rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">TimeExec&lt;2</hasPrecondition>");
 		        		bw.newLine();
 		        		bw.write("</owl:NamedIndividual>");
 		        		bw.newLine();
