@@ -1,0 +1,116 @@
+<!--
+ http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#Left_blinking 
+-->
+<owl:NamedIndividual rdf:about="http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#Left_blinking">
+<rdf:type rdf:resource="https://www.irit.fr/recherches/MELODI/ontologies/SAN#Actuator"/>
+<san:hasActuation rdf:resource="http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#Left_blinking_State"/>
+</owl:NamedIndividual>
+<!--
+-->
+<owl:Thing rdf:about="http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#Choice">
+<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</owl:Thing>
+<owl:NamedIndividual rdf:about="http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#Left_blinking_State">
+<rdf:type rdf:resource="https://www.irit.fr/recherches/MELODI/ontologies/SAN#Actuation"/>
+<san:hasActuationInput rdf:resource="http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#Left_blinking_input"/>
+</owl:NamedIndividual>
+<!--
+ http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#Left_blinking_input 
+-->
+<owl:NamedIndividual rdf:about="http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#Left_blinking_input">
+<rdf:type rdf:resource="https://www.irit.fr/recherches/MELODI/ontologies/SAN#ActuationInput"/>
+<san:hasActuationValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">OFF</san:hasActuationValue>
+</owl:NamedIndividual>
+<!--
+ http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#Parallel 
+-->
+<owl:Thing rdf:about="http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#Parallel">
+<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</owl:Thing>
+<!--
+ http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#Sequence 
+-->
+<owl:Thing rdf:about="http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#Sequence">
+<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</owl:Thing>
+<!--
+ http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#getState_Lef_blinking_Performance 
+-->
+<owl:NamedIndividual rdf:about="http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#getState_Lef_blinking_Performance">
+<rdf:type rdf:resource="http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#Performance"/>
+<hasAvailability rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</hasAvailability>
+<hasExecTime rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.1</hasExecTime>
+<hasTotalCalls rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</hasTotalCalls>
+</owl:NamedIndividual>
+<!--
+ http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#getState_Lef_blinking_QoS 
+-->
+<owl:NamedIndividual rdf:about="http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#getState_Lef_blinking_QoS">
+<rdf:type rdf:resource="http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#QoS"/>
+<hasPerformance rdf:resource="http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#getState_Lef_blinking_Performance"/>
+</owl:NamedIndividual>
+<!--
+ 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Rules
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     
+-->
+<rdf:Description rdf:about="http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#a">
+<rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+</rdf:Description>
+<rdf:Description rdf:about="http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#v">
+<rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+</rdf:Description>
+<rdf:Description rdf:about="http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#g">
+<rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+</rdf:Description>
+<rdf:Description>
+<swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
+<rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Lane change</rdfs:comment>
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R1</rdfs:label>
+<rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
+<swrl:body>
+<rdf:Description>
+<rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+<rdf:first>
+<rdf:Description>
+<rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+<swrl:propertyPredicate rdf:resource="https://www.irit.fr/recherches/MELODI/ontologies/SAN#hasActuationValue"/>
+<swrl:argument1 rdf:resource="http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#a"/>
+<swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ON</swrl:argument2>
+</rdf:Description>
+</rdf:first>
+<rdf:rest>
+<rdf:Description>
+<rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+<rdf:first>
+<rdf:Description>
+<rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+<swrl:classPredicate rdf:resource="https://www.irit.fr/recherches/MELODI/ontologies/SAN#ActuationInput"/>
+<swrl:argument1 rdf:resource="http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#a"/>
+</rdf:Description>
+</rdf:first>
+<rdf:rest>
+<rdf:Description>
+<rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+<rdf:first>
+<rdf:Description>
+<rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+<swrl:propertyPredicate rdf:resource="http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#hasGoal"/>
+<swrl:argument1 rdf:resource="http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#v"/>
+<swrl:argument2 rdf:resource="http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#g"/>
+</rdf:Description>
+</rdf:first>
+<rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+</rdf:Description>
+</rdf:rest>
+</rdf:Description>
+</rdf:rest>
+</rdf:Description>
+</swrl:body>
+<swrl:head rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+</rdf:Description>
+</rdf:RDF>
