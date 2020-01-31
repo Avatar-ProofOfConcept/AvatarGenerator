@@ -1,6 +1,7 @@
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,7 +28,13 @@ public class Main {
 	        String users = sc.nextLine();
 	        System.out.println("please input number of functionnalities:");
 	        String func = sc.nextLine();
-	        
+			try {
+				copyHeader(new File("header2.owl"),new File("KB.owl"));
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
 	        System.out.println("Avatars generation...");
 	        float lStartTime = System.nanoTime();
 	        ArrayList <AvatarProfile> avatars =new ArrayList<AvatarProfile>();
@@ -206,9 +213,9 @@ public class Main {
         	 
         	   //fill semanticfile
    	      try {
-   				copyHeader(new File("header.owl"),new File("avatar"+port+".owl"),tmp,port);
+   				copyHeader(new File("header.owl"),new File("avatar"+port+".owl"));
    				FillFile(new File("avatar"+port+".owl"),tmp,port);
-   				copyHeader(new File("footer.owl"),new File("avatar"+port+".owl"),tmp,port);
+   				copyHeader(new File("footer.owl"),new File("avatar"+port+".owl"));
 
 
    			} catch (IOException e) {
@@ -222,6 +229,15 @@ public class Main {
 	        float output = lEndTime - lStartTime;
 
 	        System.out.println("Elapsed time in milliseconds: " + output / 1000000f);
+	        
+	        //THE END 
+	        try {
+				copyHeader(new File("footer2.owl"),new File("KB.owl"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    
 	}
 	    
 
@@ -232,7 +248,7 @@ public class Main {
 
 	 
 	   
-	private static void copyHeader(File source, File dest,AvatarProfile tmp,int port) throws IOException {
+	private static void copyHeader(File source, File dest) throws IOException {
 	    InputStream is = null;
 	    OutputStream os = null;
 	    try {
@@ -260,15 +276,23 @@ public class Main {
 	 
 	        	 
 	        OutputStream  os = new FileOutputStream(dest,true);
+	        OutputStream  kb = new FileOutputStream("KB.owl",true);
 
  	            int i;
 	        	BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os));
+	        	BufferedWriter bwKb = new BufferedWriter(new OutputStreamWriter(kb));
+
 	        	bw.newLine();
+	        	bwKb.newLine();
 	        	 /************************Avatar****************/
 	        		bw.write("<owl:NamedIndividual rdf:about=\"http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#Avatar"+port+"\">");
 	        		bw.newLine();
+	        		bwKb.write("<owl:NamedIndividual rdf:about=\"http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#Avatar"+port+"\">");
+	        		bwKb.newLine();
 	        		bw.write("<rdf:type rdf:resource=\"http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#Avatar\"/>");
 	        		bw.newLine();
+	        		bwKb.write("<rdf:type rdf:resource=\"http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#Avatar\"/>");
+	        		bwKb.newLine();
 	        		bw.write("<hasGoal rdf:resource=\"http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#Goal"+port+"\"/>");
 	        		bw.newLine();
 	        		for(i=0;i<tmp.getServices().size();i++)
@@ -282,19 +306,31 @@ public class Main {
 	        			 
 	        			bw.write("<hasInterest rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">Interest"+tmp.getInterests().get(i)+"/"+tmp.getInterestsLevel().get(i)+"</hasInterest>");
 		        		bw.newLine();
+		        		bwKb.write("<hasInterest rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">Interest"+tmp.getInterests().get(i)+"/"+tmp.getInterestsLevel().get(i)+"</hasInterest>");
+		        		bwKb.newLine();
 	        		}
 	        		bw.write("<hasOwner rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">Owner"+tmp.getUserID()+"</hasOwner>");
 	        		bw.newLine();
 	        		bw.write("<hasLocation rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">"+tmp.getLon()+"/"+tmp.getLat()+"</hasLocation>");
 	        		bw.newLine();
+	        		
+	        		bwKb.write("<hasOwner rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">Owner"+tmp.getUserID()+"</hasOwner>");
+	        		bwKb.newLine();
+	        		bwKb.write("<hasLocation rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">"+tmp.getLon()+"/"+tmp.getLat()+"</hasLocation>");
+	        		bwKb.newLine();
 	        		bw.write("<represents rdf:resource=\"http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#Left_blinking\"/>");
 	        		bw.newLine();
 	        		bw.write("<deployedIn rdf:datatype=\"http://www.w3.org/2001/XMLSchema#anyURI\">"+tmp.getUrl()+"</deployedIn>");
 	        		bw.newLine();
+	        		bwKb.write("<deployedIn rdf:datatype=\"http://www.w3.org/2001/XMLSchema#anyURI\">"+tmp.getUrl()+"</deployedIn>");
+	        		bwKb.newLine();
 	        		bw.write("<hasMobility rdf:datatype=\"http://www.w3.org/2001/XMLSchema#boolean\">true</hasMobility>");
 	        		bw.newLine();
 	        		bw.write("</owl:NamedIndividual>");
 	        		bw.newLine();
+	        		
+	        		bwKb.write("</owl:NamedIndividual>");
+	        		bwKb.newLine();
 	        		/****************Process***********************/
 	        		bw.write("<owl:NamedIndividual rdf:about=\"http://www.laas-cnrs.fr/recherches/SARA/ontologies/AvatarOnt#Goal"+port+"\">");
 	        		bw.newLine();
@@ -431,6 +467,7 @@ public class Main {
 		        		
 	        		}
 	        		bw.close();
+	        		bwKb.close();
 	        		os.close();
 	     	
              
