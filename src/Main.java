@@ -210,7 +210,7 @@ public class Main {
         			   }
         		   }
         	   }
-        	 
+        	    tmp.getFunctionsAvatar();
         	   //fill semanticfile
    	      try {
    				copyHeader(new File("header.owl"),new File("avatar"+port+".owl"));
@@ -224,6 +224,7 @@ public class Main {
    				e.printStackTrace();
    			}
    	        port++;
+   	    
 	        }
 	        float lEndTime = System.nanoTime();
 	        float output = lEndTime - lStartTime;
@@ -237,6 +238,7 @@ public class Main {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+	        
 	    
 	}
 	    
@@ -328,7 +330,11 @@ public class Main {
 	        		bw.newLine();
 	        		bw.write("</owl:NamedIndividual>");
 	        		bw.newLine();
-	        		
+	        		for(i=0;i<tmp.getFunctions().size();i++)
+	        		{
+	        			bwKb.write("<hasFunction rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">Function"+tmp.getFunctions().get(i)+"</hasFunction>");
+		        		bwKb.newLine();
+	        		}
 	        		bwKb.write("</owl:NamedIndividual>");
 	        		bwKb.newLine();
 	        		/****************Process***********************/

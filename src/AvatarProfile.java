@@ -6,6 +6,13 @@ public class AvatarProfile {
 	private int userID;
 	private double lat;
 	private double lon;
+	private ArrayList<Integer> functions=new ArrayList<Integer>();
+	public ArrayList<Integer> getFunctions() {
+		return functions;
+	}
+	public void setFunctions(ArrayList<Integer> functions) {
+		this.functions = functions;
+	}
 	public double getLat() {
 		return lat;
 	}
@@ -58,6 +65,27 @@ public class AvatarProfile {
 	}
 	public void setGoal(Process goal) {
 		this.goal = goal;
+	}
+	public void getFunctionsAvatar()
+	{
+		for(int i=0;i<goal.getAtomictasks().size();i++)
+		{
+			if(this.services.contains(goal.getAtomictasks().get(i)))
+					{
+				    if(!this.functions.contains(this.goal.getFunctions().get(i))) this.functions.add(this.goal.getFunctions().get(i));
+ 					}
+		 
+
+		}
+		for(int i=0;i<goal.getGroupedTask().getAtomicTasks().size();i++)
+		{
+			if(this.services.contains(goal.getGroupedTask().getAtomicTasks().get(i)))
+					{
+				     if(!this.functions.contains(this.goal.getFunctions().get(i)))this.functions.add(this.goal.getFunctions().get(i));
+ 					}
+		 
+
+		}
 	}
 	
 	
