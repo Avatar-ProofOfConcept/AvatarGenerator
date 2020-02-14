@@ -68,6 +68,7 @@ public class AvatarProfile {
 	}
 	public void getFunctionsAvatar()
 	{
+		System.out.print("services "+this.services.toString()+" ");
 		for(int i=0;i<goal.getAtomictasks().size();i++)
 		{
 			if(this.services.contains(goal.getAtomictasks().get(i)))
@@ -77,11 +78,13 @@ public class AvatarProfile {
 		 
 
 		}
+		System.out.print("grouepd "+this.goal.getGroupedTask().getAtomicTasks().toString()+" functions "+goal.getGroupedTask().getFunctions().toString());
+
 		for(int i=0;i<goal.getGroupedTask().getAtomicTasks().size();i++)
 		{
 			if(this.services.contains(goal.getGroupedTask().getAtomicTasks().get(i)))
 					{
-				     if(!this.functions.contains(this.goal.getFunctions().get(i)))this.functions.add(this.goal.getFunctions().get(i));
+				     if(!this.functions.contains(this.goal.getGroupedTask().getFunctions().get(i)))this.functions.add(this.goal.getGroupedTask().getFunctions().get(i));
  					}
 		 
 
