@@ -68,7 +68,7 @@ public class AvatarProfile {
 	}
 	public void getFunctionsAvatar()
 	{
-		System.out.print("services "+this.services.toString()+" ");
+		//System.out.print("services "+this.services.toString()+" ");
 		for(int i=0;i<goal.getAtomictasks().size();i++)
 		{
 			if(this.services.contains(goal.getAtomictasks().get(i)))
@@ -78,7 +78,7 @@ public class AvatarProfile {
 		 
 
 		}
-		System.out.print("grouepd "+this.goal.getGroupedTask().getAtomicTasks().toString()+" functions "+goal.getGroupedTask().getFunctions().toString());
+		//System.out.print("grouepd "+this.goal.getGroupedTask().getAtomicTasks().toString()+" functions "+goal.getGroupedTask().getFunctions().toString());
 
 		for(int i=0;i<goal.getGroupedTask().getAtomicTasks().size();i++)
 		{
